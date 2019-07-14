@@ -6,7 +6,10 @@
 package domino;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Random;
+
+import static java.util.Collections.shuffle;
 
 /**
  *
@@ -14,7 +17,9 @@ import java.util.Random;
  */
 public class ControlUnit extends ArrayList{
     private boolean tapa = false;
+
 	private ArrayList<Fichas> fichasDelJuego = new ArrayList<Fichas>();
+
 	Fichas ficha00 = new Fichas(0,0,  tapa); Fichas ficha11 = new Fichas(1,1,  tapa); Fichas ficha22 = new Fichas(2,2,  tapa); Fichas ficha33 = new Fichas(3,3,  tapa); Fichas ficha44 = new Fichas(4,4,  tapa); Fichas ficha55 = new Fichas(5,5,  tapa); Fichas ficha66 = new Fichas(6,6,  tapa);
 	Fichas ficha01 = new Fichas(0,1,  tapa); Fichas ficha12 = new Fichas(1,2,  tapa); Fichas ficha23 = new Fichas(2,3,  tapa); Fichas ficha34 = new Fichas(3,4,  tapa); Fichas ficha45 = new Fichas(4,5,  tapa); Fichas ficha56 = new Fichas(5,6,  tapa);
 	Fichas ficha02 = new Fichas(0,2,  tapa); Fichas ficha13 = new Fichas(1,3,  tapa); Fichas ficha24 = new Fichas(2,4,  tapa); Fichas ficha35 = new Fichas(3,5,  tapa); Fichas ficha46 = new Fichas(4,6,  tapa);
@@ -22,7 +27,6 @@ public class ControlUnit extends ArrayList{
 	Fichas ficha04 = new Fichas(0,4,  tapa); Fichas ficha15 = new Fichas(1,5,  tapa); Fichas ficha26 = new Fichas(2,6,  tapa);
 	Fichas ficha05 = new Fichas(0,5,  tapa); Fichas ficha16 = new Fichas(1,6,  tapa);
 	Fichas ficha06 = new Fichas(0,6,  tapa);
-
 
 	public ControlUnit() {
 		fichasDelJuego.add(ficha00); fichasDelJuego.add(ficha01); fichasDelJuego.add(ficha02); fichasDelJuego.add(ficha03); fichasDelJuego.add(ficha04); fichasDelJuego.add(ficha05); fichasDelJuego.add(ficha06);
@@ -35,14 +39,25 @@ public class ControlUnit extends ArrayList{
 	}
 
 	Fichas fichaPedida;
+
 	Random r = new Random();
 	int cualFicha;
-
 	public ArrayList<Fichas> getManoJugador() {
 		return manoJugador;
 	}
 
+	public ArrayList<Fichas> getRandomFichaDelJuego() {
+		ArrayList<Fichas> aux = fichasDelJuego;
+		Collections.shuffle(aux);
+		return aux;
+	}
+
 	private ArrayList<Fichas> manoJugador = new ArrayList<Fichas>();
+
+	public ArrayList<Fichas> getManoComputador() {
+		return manoComputador;
+	}
+
 	private ArrayList<Fichas> manoComputador = new ArrayList<Fichas>();
 
 
