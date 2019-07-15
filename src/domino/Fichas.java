@@ -4,15 +4,34 @@
  * and open the template in the editor.
  */
 package domino;
+
 import javax.swing.*;
 import java.util.ArrayList;
 
 
 /**
- *
  * @author invitado
  */
-public class Fichas  {
+public class Fichas {
+
+
+    private int cara1, cara2;
+    private ImageIcon imagen;
+    private boolean tapa;
+
+    Fichas(int i, int i0, boolean tapa) {
+        cara1 = i;
+        cara2 = i0;
+
+        imagen = new ImageIcon("src/imagenes/" + i + "-" + i0 + ".jpg");
+
+        this.tapa = tapa;
+    }
+
+    public ImageIcon getImagenDomino() {
+        return imagen;
+    }
+
     public int getCara1() {
         return cara1;
     }
@@ -22,21 +41,8 @@ public class Fichas  {
         return cara2;
     }
 
-    private int cara1,cara2;
-     private ImageIcon imagen;
-    private boolean tapa;
-
-    Fichas(int i, int i0,  boolean tapa) {
-    	cara1 = i;
-    	cara2 = i0;
-
-        imagen = new ImageIcon("src/imagenes/"+i+"-"+i0+".jpg");
-
-        this.tapa = tapa;
-    }
-
-    public ImageIcon  getImagenDomino() {
-        return imagen;
+    public int getSum(){
+        return cara1 + cara2;
     }
 }
 

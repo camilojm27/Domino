@@ -21,15 +21,16 @@ public class GUIPrincipal extends JFrame {
     private PanelJuego panelJuego = new PanelJuego();
     private PanelPC panelPC = new PanelPC();
     private PanelJugador panelJugador = new PanelJugador();
-    private Escucha escucha;
-    private JLabel destino = new JLabel(), origen = new JLabel();
+    private EscuchaInicio escuchaInicio;
+    private boolean playerInit; // 1 si es el jugador 0 si es el computador
+
 
 
 
     public GUIPrincipal() {
         controlUnit.repartirFichas();
 
-        escucha = new Escucha();
+        escuchaInicio = new EscuchaInicio();
         initGUI();
 
         this.setTitle("Domino!      骨牌    ドミノ");
@@ -46,8 +47,9 @@ public class GUIPrincipal extends JFrame {
 
         for (int i = 0; i < 28; i++){
 
-            printFichasDelJuego.add(new JLabel(fichasDelJuego.get(i).getImagenDomino()));
-            printFichasDelJuego.get(i).addMouseListener(escucha);
+            //printFichasDelJuego.add(new JLabel(fichasDelJuego.get(i).getImagenDomino()));
+            printFichasDelJuego.add(new JLabel(fichaVoid));
+            printFichasDelJuego.get(i).addMouseListener(escuchaInicio);
             panelJuego.add(printFichasDelJuego.get(i));
 
         }
@@ -73,28 +75,49 @@ public class GUIPrincipal extends JFrame {
 
     }
 
-    private class Escucha implements MouseListener {
+
+
+    private class EscuchaInicio implements MouseListener {
+        private JLabel imagenJugador = new JLabel();
+        private int playerValue;
+        private int pcvalue;
+        private Fichas fichaJugador = controlUnit.dameUnaFicha();
+        private Fichas fichaPC = controlUnit.dameUnaFicha();
+
+
         @Override
         public void mouseClicked(MouseEvent e) {
-            if(cambiar==false) {
-                origen = (JLabel)e.getSource();
-                cambiar=true;
+            imagenJugador = (JLabel) e.getSource();
+            playerValue = fichaJugador.getSum();
+            pcvalue = fichaPC.getSum();
+
+            imagenJugador.setIcon(fichaJugador.getImagenDomino());
+
+
+            if (playerValue > pcvalue){
+                playerInit = true;
+                JOptionPane.showMessageDialog(null, "Sacaste más puntaje, tu inicias!");
             }
-            else {
-                destino = (JLabel)e.getSource();
-                Icon icon = destino.getIcon();
-                destino.setIcon(origen.getIcon());
-                origen.setIcon(icon);
-                cambiar=false;
+            else{
+                JOptionPane.showMessageDialog(null, "Sacaste menor puntaje, la maquina inicia");
+
+                for (int i = 0; i < 28; i++){
+
+
+                    panelJuego.remove(new JLabel(fichaVoid));
+                    panelJuego.remove(imagenJugador);
+
+                }
+                panelJuego.updateUI();
             }
+
+
+
         }
 
         @Override
         public void mousePressed(MouseEvent e) {
-            if(cambiar==false) {
-                origen = (JLabel)e.getSource();
-                cambiar=true;
-            }
+
         }
 
         @Override
@@ -104,13 +127,7 @@ public class GUIPrincipal extends JFrame {
 
         @Override
         public void mouseEntered(MouseEvent e) {
-            if(cambiar==true) {
-                destino = (JLabel)e.getSource();
-                Icon icon = destino.getIcon();
-                destino.setIcon(origen.getIcon());
-                origen.setIcon(icon);
-                cambiar=false;
-            }
+
         }
 
         @Override
