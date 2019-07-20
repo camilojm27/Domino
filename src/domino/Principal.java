@@ -15,12 +15,6 @@ import java.awt.*;
 public class Principal {
     
     public static void main(String args[]) {
-
-
-
-        ControlUnit control = new ControlUnit();
-        control.repartirFichas();
-        control.imprimirMano();
         try {
             String className = UIManager.getCrossPlatformLookAndFeelClassName();
             UIManager.setLookAndFeel(className);

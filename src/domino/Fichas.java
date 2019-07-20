@@ -5,6 +5,8 @@
  */
 package domino;
 
+// https://es.stackoverflow.com/questions/90765/c%C3%B3mo-rotar-una-jlabel-en-java
+
 import javax.swing.*;
 import java.util.ArrayList;
 
