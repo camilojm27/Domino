@@ -189,26 +189,42 @@ public class ControlUnit extends ArrayList{
 		int cara2 = fichaActiva.getIcon().toString().charAt(15) - 48;
 
 		boolean same = false;
-		if (cara1 == cara2){same=true;}
 
-		if (conteo != 0){
-			if (cara1 == getFichasPanelJuego().get(0).getIcon().toString().charAt(13) - 48 ){
-				//Rotar 180 añadir a la izquierda
+
+        if ( cara1 ==  cara2){
+            same=true;
+
+        }
+        if (conteo != 0){
+
+		    if (same && cara1 ==  getFichasPanelJuego().get(0).getIcon().toString().charAt(13) - 48 ){
+                JOptionPane.showMessageDialog(null, "Rotar 90 añadir a la izquierda");
+            }
+		    else if (same && cara1 ==  getFichasPanelJuego().get(0).getIcon().toString().charAt(15) - 48 ){
+                JOptionPane.showMessageDialog(null, "Rotar 90 añadir a la derecha");
+            }
+			else if (cara1 == getFichasPanelJuego().get(0).getIcon().toString().charAt(13) - 48 ){
+				//   //Añadir al panel Dejar igual
+                //                JOptionPane.showMessageDialog(null, "Añadir al panel Dejar igual");
 				JOptionPane.showMessageDialog(null, "Rotar 180 añadir a la izquierda");
 				return 1;
 			}
 			else if (cara2 == getFichasPanelJuego().get(0).getIcon().toString().charAt(13) - 48 ){
+			    //No rotación pero añadir a la izquierda
+                JOptionPane.showMessageDialog(null, "No rotación pero añadir a la izquierda");
 				return 2;
 			}
-			else if (cara1 == getFichasPanelJuego().get(fichasPanelJuego.size() -1 ).getIcon().toString().charAt(13) - 48 ){
+			else if (cara1 == getFichasPanelJuego().get(fichasPanelJuego.size() -1 ).getIcon().toString().charAt(15) - 48 ){
+                //Añadir al panel Dejar igual
+                JOptionPane.showMessageDialog(null, "Añadir al panel Dejar igual");
 				return 3;
 			}
-			else if (cara2 == getFichasPanelJuego().get(fichasPanelJuego.size() -1 ).getIcon().toString().charAt(13) - 48 ){
+			else if (cara2 == getFichasPanelJuego().get(fichasPanelJuego.size() -1 ).getIcon().toString().charAt(15) - 48 ){
+                //Rotan 180 dejar igual
+                JOptionPane.showMessageDialog(null, "Rotan 180 dejar igual");
 				return 4;
 			}
-			else if (same){
-				return 0;
-			}
+
 
 		}
 		else if (conteo == 0){
@@ -274,7 +290,7 @@ public class ControlUnit extends ArrayList{
 	}
 
 	public void setFichasPanelJuego(JLabel fichaLabel) {
-		fichasPanelJuego.add(fichaLabel);
+		fichasPanelJuego.add(0, fichaLabel);
 	}
 }
 

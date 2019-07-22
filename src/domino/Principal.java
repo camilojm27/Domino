@@ -7,6 +7,7 @@ package domino;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.IOException;
 
 /**
  *
@@ -21,8 +22,14 @@ public class Principal {
         }
         catch (Exception e) {}
 
-        EventQueue.invokeLater(new Runnable() {public void run() { GUIPrincipal myWindow =
-                new GUIPrincipal(); }});
+        EventQueue.invokeLater(new Runnable() {public void run() {
+            try {
+                GUIPrincipal myWindow =
+                        new GUIPrincipal();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }});
         
     
         

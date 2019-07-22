@@ -1,9 +1,13 @@
 package domino;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class GUIPrincipal extends JFrame {
@@ -36,7 +40,7 @@ public class GUIPrincipal extends JFrame {
     private boolean gameOver = false;
 
 
-    public GUIPrincipal() {
+    public GUIPrincipal() throws IOException {
         controlUnit.repartirFichas();
 
         escuchaInicio = new EscuchaInicio();
@@ -50,6 +54,7 @@ public class GUIPrincipal extends JFrame {
         this.setSize(1000, 1000);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
+
 
     private void initGUI() {
         this.getContentPane().setLayout(new BorderLayout());
@@ -141,14 +146,16 @@ public class GUIPrincipal extends JFrame {
 
                 controlUnit.setConteo();
                 panelJuego.add(fichaActiva);
+                panelJuego.RotateJLabel
                 fichaActiva.removeMouseListener(escuchaFichas);
                 controlUnit.removeFicha(manoJugador, fichaActiva);
                 controlUnit.imprimirMano();
                 panelJuego.updateUI();
                 panelJugador.updateUI();
+
                 break;
             case 1:
-
+                controlUnit.setFichasPanelJuego(fichaActiva);
                 controlUnit.setConteo();
                 panelJuego.add(fichaActiva);
                 fichaActiva.removeMouseListener(escuchaFichas);
@@ -157,6 +164,38 @@ public class GUIPrincipal extends JFrame {
                 panelJuego.updateUI();
                 panelJugador.updateUI();
                 break;
+            case 3:
+                controlUnit.setFichasPanelJuego(fichaActiva);
+                controlUnit.setConteo();
+                panelJuego.add(fichaActiva);
+                fichaActiva.removeMouseListener(escuchaFichas);
+                controlUnit.removeFicha(manoJugador, fichaActiva);
+                controlUnit.imprimirMano();
+                panelJuego.updateUI();
+                panelJugador.updateUI();
+                break;
+            case 4:
+
+                controlUnit.setFichasPanelJuego(fichaActiva);
+                controlUnit.setConteo();
+                panelJuego.add(fichaActiva);
+                fichaActiva.removeMouseListener(escuchaFichas);
+                controlUnit.removeFicha(manoJugador, fichaActiva);
+                controlUnit.imprimirMano();
+                panelJuego.updateUI();
+                panelJugador.updateUI();
+                break;
+            case 6:
+                controlUnit.setFichasPanelJuego(fichaActiva);
+                controlUnit.setConteo();
+                panelJuego.add(fichaActiva);
+                fichaActiva.removeMouseListener(escuchaFichas);
+                controlUnit.removeFicha(manoJugador, fichaActiva);
+                controlUnit.imprimirMano();
+                panelJuego.updateUI();
+                panelJugador.updateUI();
+                break;
+
             default:
                 break;
 

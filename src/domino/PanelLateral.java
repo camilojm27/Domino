@@ -10,6 +10,8 @@ public class PanelLateral extends JPanel  {
     private int puntaje=0;
     public int fichasPorPedir;
     private boolean gano, perdio, rendirse;
+    private ImageIcon Img = new ImageIcon(getClass().getResource("/imagenes/GridPaper.jpg"));
+    private ImageIcon IA = new ImageIcon(getClass().getResource("/imagenes/IA-PC.jpg"));
     public PanelLateral(){
 
         this.setBackground(Color.black);
@@ -25,11 +27,12 @@ public class PanelLateral extends JPanel  {
       	 
     	//Se selecciona la imagen que tenemos en el paquete de la //ruta del programa
     	 
-    	ImageIcon Img = new ImageIcon(getClass().getResource("/imagenes/GridPaper.jpg")); 
+
     	 
     	//se dibuja la imagen que tenemos en el paquete Images //dentro de un panel
     	 
     	g.drawImage(Img.getImage(), 0, 0, height.width, height.height, null);
+        g.drawImage(IA.getImage(), 20, 20, null);
     	 
     	setOpaque(false);
 
