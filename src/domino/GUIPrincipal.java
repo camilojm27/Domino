@@ -17,9 +17,6 @@ public class GUIPrincipal extends JFrame {
 
     public final ImageIcon fichaVoid = new ImageIcon("src/imagenes/0-0.jpg");
     private static ControlUnit controlUnit = new ControlUnit();
-
-
-
     private static ArrayList<Fichas> manoJugador = controlUnit.getManoJugador();
     private static ArrayList<Fichas> manoComputador = controlUnit.getManoComputador();
     private ArrayList<Fichas> fichasDelJuego = controlUnit.getRandomFichaDelJuego();
@@ -35,10 +32,22 @@ public class GUIPrincipal extends JFrame {
     private boolean playerInit; // 1 si es el jugador 0 si es el computador
     private GraphicsEnvironment ge;
     private Window ventanaPrincipal = this;
+
     private EscuchaFichas escuchaFichas = new EscuchaFichas();
     private static JLabel fichaActiva;
     private static JLabel fichaActivaPc;
+    private static JLabel fichaIzquiera;
+    private static JLabel fichaDerecha;
     private boolean gameOver = false;
+    GridBagConstraints rules = new GridBagConstraints();
+    private int gridX = 4;
+    private int gridY = 4;
+    private static JButton b, b1, b2 , b3;
+
+
+
+
+
 
 
     public GUIPrincipal()  {
@@ -93,8 +102,6 @@ public class GUIPrincipal extends JFrame {
 
     private void initGame() {
         escuchaInicio = null;
-
-
         printFichasDelJuego = new ArrayList<>();
         controlUnit.imprimirMano();
 
@@ -118,7 +125,6 @@ public class GUIPrincipal extends JFrame {
         panelJugador.updateUI();
         panelLateral.updateUI();
 
-
     }
 
     public static JLabel setFichaActivaPc() {
@@ -141,61 +147,136 @@ public class GUIPrincipal extends JFrame {
         return manoComputador;
     }
 
+
     public void playerMover() {
 
         switch (controlUnit.ponerFichaJugador(fichaActiva)) {
             case -1:
 
                 controlUnit.setConteo();
-                panelJuego.add(fichaActiva);
-                //panelJuego.RotateJLabel
+                JOptionPane.showMessageDialog(null, "Primera ficha");
+                rules.gridx= 4;
+                rules.gridy= 4;
+
+
                 fichaActiva.removeMouseListener(escuchaFichas);
                 controlUnit.removeFicha(manoJugador, fichaActiva);
+                panelJuego.add(fichaActiva,rules);
                 controlUnit.imprimirMano();
                 panelJuego.updateUI();
                 panelJugador.updateUI();
 
                 break;
             case 1:
-                controlUnit.setFichasPanelJuego(fichaActiva);
                 controlUnit.setConteo();
-                panelJuego.add(fichaActiva);
+                JOptionPane.showMessageDialog(null, "Rotar 180 añadir a la izquierda");
+
+
+                rules.gridx= 3;
+                rules.gridy= 4;
+
+
                 fichaActiva.removeMouseListener(escuchaFichas);
                 controlUnit.removeFicha(manoJugador, fichaActiva);
+                fichaActiva = controlUnit.rotarFicha(fichaActiva);
+                panelJuego.add(fichaActiva,rules);
+                controlUnit.setFichasPanelJuego(fichaActiva);
                 controlUnit.imprimirMano();
                 panelJuego.updateUI();
                 panelJugador.updateUI();
+
                 break;
+
+            case 2:
+                controlUnit.setFichasPanelJuego(fichaActiva);
+                controlUnit.setConteo();
+                JOptionPane.showMessageDialog(null, "No rotación pero añadir a la izquierda");
+
+                rules.gridx= 3;
+                rules.gridy= 4;
+
+
+                fichaActiva.removeMouseListener(escuchaFichas);
+                controlUnit.removeFicha(manoJugador, fichaActiva);
+                panelJuego.add(fichaActiva,rules);
+                controlUnit.imprimirMano();
+                panelJuego.updateUI();
+                panelJugador.updateUI();
+
+                break;
+
+
             case 3:
                 controlUnit.setFichasPanelJuego(fichaActiva);
                 controlUnit.setConteo();
-                panelJuego.add(fichaActiva);
+                JOptionPane.showMessageDialog(null, "Añadir al panel Dejar igual");
+
+                rules.gridx= 5;
+                rules.gridy= 4;
+
+
                 fichaActiva.removeMouseListener(escuchaFichas);
                 controlUnit.removeFicha(manoJugador, fichaActiva);
                 controlUnit.imprimirMano();
+                panelJuego.add(fichaActiva,rules);
                 panelJuego.updateUI();
                 panelJugador.updateUI();
+
                 break;
+
             case 4:
 
-                controlUnit.setFichasPanelJuego(fichaActiva);
                 controlUnit.setConteo();
-                panelJuego.add(fichaActiva);
+                JOptionPane.showMessageDialog(null, "Rotan 180 dejar igual");
+                rules.gridx= 5;
+                rules.gridy= 4;
+
+
                 fichaActiva.removeMouseListener(escuchaFichas);
                 controlUnit.removeFicha(manoJugador, fichaActiva);
+                fichaActiva = controlUnit.rotarFicha(fichaActiva);
+                controlUnit.setFichasPanelJuego(fichaActiva);
+                panelJuego.add(fichaActiva,rules);
                 controlUnit.imprimirMano();
                 panelJuego.updateUI();
                 panelJugador.updateUI();
+
                 break;
-            case 6:
-                controlUnit.setFichasPanelJuego(fichaActiva);
+
+            case 5:
                 controlUnit.setConteo();
-                panelJuego.add(fichaActiva);
+                JOptionPane.showMessageDialog(null, "Rotar 90 añadir a la izquierda");
+                rules.gridx= 3;
+                rules.gridy= 4;
+
+
                 fichaActiva.removeMouseListener(escuchaFichas);
                 controlUnit.removeFicha(manoJugador, fichaActiva);
+                fichaActiva = controlUnit.rotarFicha(fichaActiva);
+                controlUnit.setFichasPanelJuego(fichaActiva);
+                panelJuego.add(fichaActiva,rules);
                 controlUnit.imprimirMano();
                 panelJuego.updateUI();
                 panelJugador.updateUI();
+
+                break;
+
+            case 6:
+                controlUnit.setConteo();
+                JOptionPane.showMessageDialog(null, "Rotar 90 añadir a la derecha");
+                rules.gridx= 5;
+                rules.gridy= 4;
+
+                controlUnit.removeFicha(manoJugador, fichaActiva);
+                fichaActiva.removeMouseListener(escuchaFichas);
+
+                fichaActiva = controlUnit.rotarFicha(fichaActiva);
+                controlUnit.setFichasPanelJuego(fichaActiva);
+                panelJuego.add(fichaActiva,rules);
+                controlUnit.imprimirMano();
+                panelJuego.updateUI();
+                panelJugador.updateUI();
+
                 break;
 
             default:
@@ -221,10 +302,10 @@ public class GUIPrincipal extends JFrame {
 
         @Override
         public void mouseClicked(MouseEvent arg0) {
-
             fichaActiva = (JLabel) arg0.getSource();
             setFichaActivaPc();
             playerMover();
+            fichaActiva = (JLabel) arg0.getSource();
             panelJuego.updateUI();
             panelPC.updateUI();
 
@@ -274,6 +355,7 @@ public class GUIPrincipal extends JFrame {
 
             imagenJugador.setIcon(fichaJugador.getImagenDomino());
 
+
             if (playerValue > pcvalue) {
                 playerInit = true;
                 panelJuego.removeAll();
@@ -288,7 +370,31 @@ public class GUIPrincipal extends JFrame {
 
             }
 
+
             panelJuego.changeLayout();
+            //b= new JButton("0");
+            //b1= new JButton("1");
+            //b2= new JButton("2");
+            //b3= new JButton("3");
+
+            rules.gridx = 4;
+            rules.gridy = 4;
+            panelJuego.add(b,rules);
+
+            rules.gridx = 3;
+            rules.gridy = 4;
+            panelJuego.add(b1,rules);
+
+            rules.gridx = 5;
+            rules.gridy = 4;
+            panelJuego.add(b2,rules);
+
+            rules.gridx = 4;
+            rules.gridy = 3;
+            panelJuego.add(b3,rules);
+
+
+
 
 
         }

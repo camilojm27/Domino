@@ -9,8 +9,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Random;
 
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
+import javax.swing.*;
 
 import static java.util.Collections.shuffle;
 
@@ -22,9 +21,9 @@ public class ControlUnit extends ArrayList{
 	Fichas fichaPedida;
 	Random r = new Random();
 	int cualFicha;
-    private boolean tapa = false;
-    private ArrayList<Fichas> manoJugador = new ArrayList<Fichas>();
-    private ArrayList<Fichas> manoComputador = new ArrayList<Fichas>();
+	private boolean tapa = false;
+	private ArrayList<Fichas> manoJugador = new ArrayList<Fichas>();
+	private ArrayList<Fichas> manoComputador = new ArrayList<Fichas>();
 	private ArrayList<Fichas> fichasDelJuego = new ArrayList<Fichas>();
 
 
@@ -58,7 +57,7 @@ public class ControlUnit extends ArrayList{
 		fichasDelJuego.add(ficha66);
 	}
 
-	
+
 	public ArrayList<Fichas> getManoJugador() {
 		return manoJugador;
 	}
@@ -66,7 +65,7 @@ public class ControlUnit extends ArrayList{
 	public ArrayList<Fichas> getManoComputador() {
 		return manoComputador;
 	}
-	
+
 	public ArrayList<Fichas> getRandomFichaDelJuego() {
 		ArrayList<Fichas> aux = fichasDelJuego;
 		Collections.shuffle(aux);
@@ -81,9 +80,9 @@ public class ControlUnit extends ArrayList{
 		this.conteo = conteo+1;
 	}
 
-	
+
 	public Fichas dameUnaFicha() {
-		
+
 
 		cualFicha = r.nextInt(numero);
 		fichaPedida = fichasDelJuego.get(cualFicha);
@@ -100,7 +99,7 @@ public class ControlUnit extends ArrayList{
 			System.out.print("|");
 			System.out.println(manoJugador.get(contador).getCara2());
 			contador++;
-		   }
+		}
 		while(contador >=6);
 
 
@@ -110,16 +109,16 @@ public class ControlUnit extends ArrayList{
 		for(int i = 0; i < 7; i++) {
 			manoJugador.add(this.dameUnaFicha());
 		}
-		
+
 		for(int i = 0; i < 7; i++) {
 			manoComputador.add(this.dameUnaFicha());
 		}
-		
+
 		for(int i = 6; i > 0; i--) {
 			this.verificarFicha(i);
 			this.verificarFichasJugador(i);
 		}
-		
+
 	}
 
 	public void imprimirMano() {
@@ -130,24 +129,24 @@ public class ControlUnit extends ArrayList{
 			System.out.print("|");
 			System.out.println(manoJugador.get(j).getCara2());
 		}
-		
+
 		System.out.println ("///");
-		
+
 		for(int j = 0; j <  manoComputador.size(); j++) {
 			System.out.print(manoComputador.get(j).getCara1());
 			System.out.print("|");
 			System.out.println(manoComputador.get(j).getCara2());
-			
+
 		}
 		System.out.println("          ");
 	}
-	
+
 	public int fichasMesa() {
 		return fichasDelJuego.size();
 	}
-	
+
 	public void verificarFicha(int pos) {
-		
+
 		if((manoJugador.get(pos) == manoJugador.get(pos-1)) &  (pos - 1 <= 0)) {
 			manoJugador.set(pos-1, this.dameUnaFicha());
 			verificarFicha(pos);
@@ -160,72 +159,73 @@ public class ControlUnit extends ArrayList{
 			manoComputador.set(pos-1, this.dameUnaFicha());
 			verificarFicha(pos);
 		}
-		
-		
+
+
 	}
 
 	public void verificarFichasJugador(int pos) {
-		
+
 		for(int i = 6; i < 0; i--) {
 			if(manoJugador.get(pos) == manoJugador.get(pos-1)) {
 				manoJugador.set(pos-1, this.dameUnaFicha());
 			}
 		}
-		
+
 		int aux2 = 6;
 		for(int aux = aux2; aux < 0; aux--) {
 			if(manoJugador.get(aux) == manoJugador.get(aux-1)) {
 				manoJugador.set(pos-1, this.dameUnaFicha());
-				
+
 			}
-		aux2--;
-		verificarFichasJugador(pos);
+			aux2--;
+			verificarFichasJugador(pos);
 		}
 	}
-	
+
 	public int ponerFichaJugador(JLabel ficha) {
 		fichaActiva = GUIPrincipal.getFichaActiva();
 		int cara1 = fichaActiva.getIcon().toString().charAt(13) - 48;
 		int cara2 = fichaActiva.getIcon().toString().charAt(15) - 48;
 
-		boolean same1 = false;
+		boolean same = false;
 
 
-        if ( cara1 ==  cara2){
-            same1=true;
+		if ( cara1 ==  cara2){
+			same=true;
 
-        }
-        if (conteo != 0){
-
-		    if (same1 && cara1 ==  getFichasPanelJuego().get(0).getIcon().toString().charAt(13) - 48 ){
-		    	System.out.println("Rotan 90 izq "  );
-                JOptionPane.showMessageDialog(null, "Rotar 90 añadir a la izquierda\ncara1" +
-						" " + cara1 + " " + (getFichasPanelJuego().get(0).getIcon().toString().charAt(13) - 48));
+		}
+		if (conteo != 0){
+		    for (int i = 0; i< fichasPanelJuego.size()-1; i++){
+		        System.out.println("Ficha en la posicion " + i + "= " + fichasPanelJuego.get(i).getIcon().toString());
             }
-		    else if (same1 && cara1 ==  getFichasPanelJuego().get(0).getIcon().toString().charAt(15) - 48 ){
 
-				JOptionPane.showMessageDialog(null, "Rotar 90 añadir a la izquierda\ncara1" +
-						" " + cara1 + " " + (getFichasPanelJuego().get(0).getIcon().toString().charAt(15) - 48));
-            }
+			if (same && cara1 ==  getFichasPanelJuego().get(0).getIcon().toString().charAt(13) - 48 ){
+				//JOptionPane.showMessageDialog(null, "Rotar 90 añadir a la izquierda");
+				return 5;
+			}
+			else if (same && cara1 ==  getFichasPanelJuego().get(0).getIcon().toString().charAt(15) - 48 ){
+				//JOptionPane.showMessageDialog(null, "Rotar 90 añadir a la derecha");
+				return 6;
+			}
 			else if (cara1 == getFichasPanelJuego().get(0).getIcon().toString().charAt(13) - 48 ){
 				//   //Añadir al panel Dejar igual
-                //                JOptionPane.showMessageDialog(null, "Añadir al panel Dejar igual");
-				JOptionPane.showMessageDialog(null, "Rotar 180 añadir a la izquierda");
+				//  //                JOptionPane.showMessageDialog(null, "Añadir al panel Dejar igual");
+				//JOptionPane.showMessageDialog(null, "Rotar 180 añadir a la izquierda");
 				return 1;
 			}
 			else if (cara2 == getFichasPanelJuego().get(0).getIcon().toString().charAt(13) - 48 ){
-			    //No rotación pero añadir a la izquierda
-                JOptionPane.showMessageDialog(null, "No rotación pero añadir a la izquierda");
+				//No rotación pero añadir a la izquierda
+				//JOptionPane.showMessageDialog(null, "No rotación pero añadir a la izquierda");
 				return 2;
 			}
 			else if (cara1 == getFichasPanelJuego().get(fichasPanelJuego.size() -1 ).getIcon().toString().charAt(15) - 48 ){
-                //Añadir al panel Dejar igual
-                JOptionPane.showMessageDialog(null, "Añadir al panel Dejar igual");
+				//Añadir al panel Dejar igual
+				//JOptionPane.showMessageDialog(null, "Añadir al panel Dejar igual");
 				return 3;
 			}
 			else if (cara2 == getFichasPanelJuego().get(fichasPanelJuego.size() -1 ).getIcon().toString().charAt(15) - 48 ){
-                //Rotan 180 dejar igual
-                JOptionPane.showMessageDialog(null, "Rotan 180 dejar igual");
+				//Rotan 180 dejar igual
+				//JOptionPane.showMessageDialog(null, "Rotan 180 dejar igual");
 				return 4;
 			}
 
@@ -251,39 +251,39 @@ public class ControlUnit extends ArrayList{
 			return false;
 		}*/
 
-	//	JOptionPane.showMessageDialog(null,cara1 + "|" + cara2);
+		//	JOptionPane.showMessageDialog(null,cara1 + "|" + cara2);
 
 
 		return -100;
 	}
-	
+
 	public JLabel ponerFichaPc(JLabel ficha) {
 		fichaActivaPc = GUIPrincipal.getFichaActiva();
 		return fichaActivaPc;
-		
+
 	}
-	
+
 	public int fichaAdecuada() {
 		for(int i = 0; i > manoComputador.size(); i++) {
 			if(manoComputador.get(i).getCara1() == fichaActiva.getIcon().toString().charAt(13) - 48
-					|| manoComputador.get(i).getCara2() == fichaActiva.getIcon().toString().charAt(15) - 48) 
+					|| manoComputador.get(i).getCara2() == fichaActiva.getIcon().toString().charAt(15) - 48)
 			{
 				this.fichaCorrecta = i;
 				System.out.println(i);
 			}
 		}
 		return fichaCorrecta;
-		
-		
+
+
 	}
-	
-	
+
+
 	public void removeFicha(ArrayList<Fichas> quien, JLabel cualFicha) {
 		for(int i=0; i < quien.size(); i++) {
-			
+
 			if(cualFicha.getIcon().toString().equals(quien.get(i).getImagenDomino().toString())){
 				quien.remove(i);
-				
+
 			}
 		}
 	}
@@ -296,5 +296,12 @@ public class ControlUnit extends ArrayList{
 	public void setFichasPanelJuego(JLabel fichaLabel) {
 		fichasPanelJuego.add(0, fichaLabel);
 	}
+	public JLabel rotarFicha (JLabel jLabel){
+	    int cara1 = jLabel.getIcon().toString().charAt(13) - 48;
+        int cara2 = jLabel.getIcon().toString().charAt(15) -48;
+
+        return  new JLabel(new ImageIcon("src/Rotated/"+ cara2 + "-" + cara1 + ".jpg"));
+
+    }
 }
 
