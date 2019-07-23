@@ -35,7 +35,7 @@ public class ControlUnit extends ArrayList{
 
 	private int conteo = 0;
 	int numero = 28;
-	int fichasSobrantes;
+	public static int fichasRestantes;
 	JLabel fichaActiva;
 	JLabel fichaActivaPc;
 
@@ -188,20 +188,24 @@ public class ControlUnit extends ArrayList{
 		int cara1 = fichaActiva.getIcon().toString().charAt(13) - 48;
 		int cara2 = fichaActiva.getIcon().toString().charAt(15) - 48;
 
-		boolean same = false;
+		boolean same1 = false;
 
 
         if ( cara1 ==  cara2){
-            same=true;
+            same1=true;
 
         }
         if (conteo != 0){
 
-		    if (same && cara1 ==  getFichasPanelJuego().get(0).getIcon().toString().charAt(13) - 48 ){
-                JOptionPane.showMessageDialog(null, "Rotar 90 añadir a la izquierda");
+		    if (same1 && cara1 ==  getFichasPanelJuego().get(0).getIcon().toString().charAt(13) - 48 ){
+		    	System.out.println("Rotan 90 izq "  );
+                JOptionPane.showMessageDialog(null, "Rotar 90 añadir a la izquierda\ncara1" +
+						" " + cara1 + " " + (getFichasPanelJuego().get(0).getIcon().toString().charAt(13) - 48));
             }
-		    else if (same && cara1 ==  getFichasPanelJuego().get(0).getIcon().toString().charAt(15) - 48 ){
-                JOptionPane.showMessageDialog(null, "Rotar 90 añadir a la derecha");
+		    else if (same1 && cara1 ==  getFichasPanelJuego().get(0).getIcon().toString().charAt(15) - 48 ){
+
+				JOptionPane.showMessageDialog(null, "Rotar 90 añadir a la izquierda\ncara1" +
+						" " + cara1 + " " + (getFichasPanelJuego().get(0).getIcon().toString().charAt(15) - 48));
             }
 			else if (cara1 == getFichasPanelJuego().get(0).getIcon().toString().charAt(13) - 48 ){
 				//   //Añadir al panel Dejar igual

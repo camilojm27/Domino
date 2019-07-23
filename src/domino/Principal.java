@@ -23,12 +23,10 @@ public class Principal {
         catch (Exception e) {}
 
         EventQueue.invokeLater(new Runnable() {public void run() {
-            try {
+
                 GUIPrincipal myWindow =
                         new GUIPrincipal();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+
         }});
         
     

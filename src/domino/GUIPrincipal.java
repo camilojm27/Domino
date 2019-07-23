@@ -10,6 +10,8 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import static domino.ControlUnit.fichasRestantes;
+
 public class GUIPrincipal extends JFrame {
     public static final Dimension tamanoJuego = new Dimension(100, 100);
 
@@ -33,14 +35,13 @@ public class GUIPrincipal extends JFrame {
     private boolean playerInit; // 1 si es el jugador 0 si es el computador
     private GraphicsEnvironment ge;
     private Window ventanaPrincipal = this;
-    public static int fichasRestantes;
     private EscuchaFichas escuchaFichas = new EscuchaFichas();
     private static JLabel fichaActiva;
     private static JLabel fichaActivaPc;
     private boolean gameOver = false;
 
 
-    public GUIPrincipal() throws IOException {
+    public GUIPrincipal()  {
         controlUnit.repartirFichas();
 
         escuchaInicio = new EscuchaInicio();
@@ -117,6 +118,7 @@ public class GUIPrincipal extends JFrame {
         panelJugador.updateUI();
         panelLateral.updateUI();
 
+
     }
 
     public static JLabel setFichaActivaPc() {
@@ -146,7 +148,7 @@ public class GUIPrincipal extends JFrame {
 
                 controlUnit.setConteo();
                 panelJuego.add(fichaActiva);
-                panelJuego.RotateJLabel
+                //panelJuego.RotateJLabel
                 fichaActiva.removeMouseListener(escuchaFichas);
                 controlUnit.removeFicha(manoJugador, fichaActiva);
                 controlUnit.imprimirMano();
